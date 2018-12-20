@@ -3,7 +3,11 @@ FROM ubuntu:16.04
 WORKDIR /root/
 ENV PATH="/android_build/bin:${PATH}"
 
-RUN apt-get update && \
+RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
+    sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list && \
+    sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list && \
+    add-apt-repository ppa:openjdk-r/ppa  && \
+    apt-get update && \
     apt-get install -y openjdk-7-jdk git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev libxml2-utils xsltproc unzip python python && \
     mkdir -p /android_build/bin && \
     curl https://storage.googleapis.com/git-repo-downloads/repo > /android_build/bin/repo && \
