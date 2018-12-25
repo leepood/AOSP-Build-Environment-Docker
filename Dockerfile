@@ -2,6 +2,7 @@ FROM ubuntu:16.04
 
 WORKDIR /root/
 ENV PATH="/android_build/bin:${PATH}"
+ENV USER root
 
 RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
     sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list && \
